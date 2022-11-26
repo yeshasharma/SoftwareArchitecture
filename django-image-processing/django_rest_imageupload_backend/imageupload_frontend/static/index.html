@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en-US">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <script type="text/javascript" src="node_modules/angular/angular.js"></script>
+    <script type="text/javascript" src="node_modules/angular-resource/angular-resource.js"></script>
+    <script type="text/javascript" src="js/filesModelDirective.js"></script>
+    <script type="text/javascript" src="js/app.js"></script>
+    <script type="text/javascript" src="js/images.rest.js"></script>
+
+
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css">
+  </head>
+  <body>
+  <div ng-app="imageuploadFrontendApp" ng-controller="MainCtrl">
+      <div class="panel panel-default">
+          <div class="panel-body">
+              <center><h1>Choose an Image to Process!!</h1></center>
+             <center><form class="form" name="form" ng-submit="uploadImage(images, checkedOptions)">
+               <input type="file" files-model="newImage.image"><br/>
+                 <b>Flip</b><br/><label>Horizontal
+                <input type="checkbox" ng-model="checkedOptions.horizontal">
+              </label>
+              <label>Vertical:
+                <input type="checkbox" ng-model="checkedOptions.vertical">
+               </label><br/><br/>
+                 <b>Rotate N&#176; to Right</b><br/><label>
+    <input type="number" name="input" ng-model="checkedOptions.value"
+           min="0">&#176;
+ </label><br/>
+  <div role="alert">
+    <span class="error" ng-show="form.input.$error.number">
+      Not valid number!</span>
+  </div><br/>
+
+  <label>Grayscale&nbsp;
+    <input type="checkbox" ng-model="checkedOptions.grayscale">&nbsp;Yes
+  </label><br/><br/>
+
+  <b>Resize %</b><br/><label>
+    <input type="number" name="input" ng-model="checkedOptions.value"
+           min="0">%
+ </label>
+  <div role="alert">
+    <span class="error" ng-show="form.input.$error.number">
+      Not valid number!</span>
+  </div><br/>
+                   <label>Thumbnail&nbsp;
+    <input type="checkbox" ng-model="checkedOptions.thumbnail">&nbsp;Yes
+  </label><br/><br/>
+                 <label><b>Rotate</b>
+                       <br/> <input type="radio" ng-model="checkedOptions.name" value="Right">
+    Right
+  </label>
+                    <label>
+                        <input type="radio" ng-model="checkedOptions.name" value="Left">
+    Left
+  </label><br/><br/>
+  <!--<tt>value1 = {{checkboxModel.horizontal}}</tt><br/>
+  <tt>value2 = {{checkboxModel.vertical}}</tt><br/>
+
+  <tt>value = {{rotate.value}}</tt><br/>
+  <tt>form.input.$valid = {{form.input.$valid}}</tt><br/>
+  <tt>form.input.$error = {{form.input.$error}}</tt><br/>
+  <tt>form.$valid = {{form.$valid}}</tt><br/>
+  <tt>form.$error.required = {{!!form.$error.required}}</tt><br/>-->
+                 <button type="submit" class="btn btn-primary">
+                   Upload
+                 </button>
+             </form></center>
+          </div>
+      </div>
+      <div ng-if="images.length == 0">
+        There are no images available yet, How about uploading one?
+      </div>
+
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4"
+             ng-repeat="image in images track by image.pk"> &nbsp;
+           <button id="btn-gray" class="btn btn-primary" ng-click="grayImage(image)">Grayscale</button>
+           <button id="btn-flip" class="btn btn-primary" ng-click="flipImage(image)">Flip</button></h3>
+          <img ng-src="{{ image.image }}" class="img-responsive">
+        </div>
+      </div>
+
+    </div>
+
+
+  </body>
+</html>
+
+

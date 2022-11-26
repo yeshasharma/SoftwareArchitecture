@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+      <div class="md-form">
+          <center><label for="form">Related Searches</label><br>
+           <textarea id="form" class="md-textarea form-control" rows="3" style="width: 848px; height: 202px;">
+              {% for address in addresses %}
+               {% for value in address %}
+                 {{ value }}
+               {% endfor %}
+              {% endfor %}
+           </textarea>
+          </center>
+
+      </div>
+</body>
+</html>
